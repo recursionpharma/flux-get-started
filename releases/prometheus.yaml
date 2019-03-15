@@ -1,0 +1,164 @@
+---
+apiVersion: flux.weave.works/v1beta1
+kind: HelmRelease
+metadata:
+  name: prometheus
+  namespace: demo
+  annotations:
+    flux.weave.works/automated: "false"
+    flux.weave.works/tag.chart-image: glob:8.7.*
+spec:
+  releaseName: prometheus
+  chart:
+    git: ssh://git@github.com/recursionpharma/flux-get-started
+    ref: master
+    path: charts/prometheus
+  values:
+
+deployExporterNode: True
+
+deployGrafana: False
+
+global:
+  rbacEnable: true
+
+deployAlertManager: True
+
+alertmanager:
+  config:
+    global:
+      resolve_timeout: 5m
+    route:
+      group_by: ['job']
+      group_wait: 30s
+      group_interval: 5m
+      repeat_interval: 12h
+      receiver: 'null'
+      routes:
+      - match:
+          alertname: DeadMansSwitch
+        receiver: 'null'
+    receivers:
+    - name: 'null'
+
+  externalUrl: ""
+
+  image:
+    repository: quay.io/prometheus/alertmanager
+    tag: v0.9.1
+
+  ingress:
+    enabled: false
+
+    annotations: {}
+
+    fqdn: ""
+
+    tls: []
+
+  nodeSelector: {}
+
+  paused: false
+
+  replicaCount: 1
+
+  podAntiAffinity: "soft"
+
+  resources: {}
+
+  service:
+    annotations: {}
+
+    clusterIP: ""
+
+    externalIPs: []
+
+    loadBalancerIP: ""
+
+    loadBalancerSourceRanges: []
+
+    nodePort: 30903
+
+    type: ClusterIP
+
+  storageSpec: {}
+
+prometheus:
+  alertingEndpoints: []
+
+  config:
+    specifiedInValues: true
+    value: {}
+
+  externalUrl: ""
+
+  image:
+    repository: quay.io/prometheus/prometheus
+    tag: v2.0.0
+
+  ingress:
+    enabled: false
+
+    annotations: {}
+
+    fqdn: ""
+
+    tls: []
+
+  nodeSelector: {}
+
+  paused: false
+
+  replicaCount: 1
+
+  podAntiAffinity: "soft"
+
+  resources: {}
+
+  retention: 30d
+
+  routePrefix: /
+
+  rulesSelector: {}
+
+  rules:
+    specifiedInValues: true
+    value: {}
+
+  service:
+    annotations: {}
+
+    clusterIP: ""
+
+    externalIPs: []
+
+    loadBalancerIP: ""
+
+    loadBalancerSourceRanges: []
+
+    nodePort: 30900
+
+    type: ClusterIP
+
+  serviceMonitorsSelector: {}
+
+  serviceMonitors: []
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  storageSpec: {}
+
