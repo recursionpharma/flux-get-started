@@ -3,7 +3,7 @@ apiVersion: flux.weave.works/v1beta1
 kind: HelmRelease
 metadata:
   name: prometheus
-  namespace: demo
+  namespace: kube-system
   annotations:
     flux.weave.works/automated: "false"
     flux.weave.works/tag.chart-image: glob:8.7.*
