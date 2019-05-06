@@ -1,0 +1,14 @@
+appVersion: 1.13.1
+description: Minecraft server
+home: https://minecraft.net/
+keywords:
+- game
+- server
+maintainers:
+- email: gtaylor@gc-taylor.com
+  name: gtaylor
+name: minecraft
+sources:
+- https://hub.docker.com/r/itzg/minecraft-server/~/dockerfile/
+- https://github.com/itzg/dockerfiles
+version: 0.3.2
