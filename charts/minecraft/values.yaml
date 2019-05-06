@@ -18,7 +18,7 @@ securityContext:
 # https://hub.docker.com/r/itzg/minecraft-server/
 minecraftServer:
   # This must be overridden, since we can't accept this for the user.
-  eula: "FALSE"
+  eula: "TRUE"
   # One of: LATEST, SNAPSHOT, or a specific version (ie: "1.7.9").
   version: "1.13.1"
   # This can be one of empty string, "FORGE", "SPIGOT", "BUKKIT", "PAPER", "FTB", "SPONGEVANILLA"; empty string will produce a vanilla server
